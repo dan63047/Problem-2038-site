@@ -1,0 +1,20 @@
+body{
+    background-color: #000;
+    color: #fff;
+    font-family: 'Heebo', sans-serif;
+}
+#prog{
+    width: 100%;
+}
+#time-left{
+    font-size: 6em;
+}
+#time-left-readable{
+    text-align: center;
+}
+#title{
+    text-align: center;
+}
+a:visited{
+    color: #fff;
+}

@@ -7,7 +7,7 @@ body{
     width: 100%;
 }
 #time-left{
-    font-size: 6em;
+    font-size: 10em;
 }
 #time-left-readable{
     text-align: center;

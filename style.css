@@ -8,6 +8,7 @@ body{
 }
 #time-left{
     font-size: 10em;
+    cursor: pointer;
 }
 #time-left-readable{
     text-align: center;

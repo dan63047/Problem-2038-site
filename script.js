@@ -1,9 +1,20 @@
 const maxtimestamp = 2147483647;
 var readable_timer_mode = 0;
+var msec_display = true;
 
 function ReadableTimerSwitcher(){
     readable_timer_mode++
-    if(readable_timer_mode > 1){readable_timer_mode = 0}
+    if(readable_timer_mode > 2){readable_timer_mode = 0}
+}
+
+function msecDisplaySwitcher(){
+    if(msec_display){
+        msec_display = false
+        $("#time-left-msec").css("display", "none");
+    }else{
+        msec_display = true
+        $("#time-left-msec").css("display", "unset");
+    }
 }
 
 function Cycle() {
@@ -15,7 +26,7 @@ function Cycle() {
     $("#time-left-msec").html("." + ('00' + tmsec).slice(-3));
     $("#prog").val(timestamp);
     $("#timestamp").html(Math.trunc(timestamp).toLocaleString('ru'));
-    if (left < 60) { $("#time-left-readable").css("display", "none") }
+    if (left < 60 && readable_timer_mode != 2) { $("#time-left-readable").css("display", "none") }
     if (left <= 0) {
         clearInterval(c);
         $("#time-left").html("0");
@@ -37,6 +48,10 @@ function Cycle() {
             tday = Math.floor(left / 60 / 60 / 24) % 365,
             tyear = Math.floor(left / 60 / 60 / 24 / 365);
         $("#time-left-readable").html("(" + tyear + " л. " + tday + " дн. " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
+        break;
+        case 2:
+        var precentage = (timestamp/maxtimestamp)*100;
+        $("#time-left-readable").html(Math.trunc(timestamp).toLocaleString('ru')+" / "+maxtimestamp.toLocaleString('ru')+" ("+precentage.toFixed(8)+"%)");
         break;
     }
 }

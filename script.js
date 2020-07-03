@@ -1,36 +1,29 @@
 const maxtimestamp = 2147483647;
 var readable_timer_mode = 0;
-var msec_display = true;
 
 function ReadableTimerSwitcher(){
     readable_timer_mode++
     if(readable_timer_mode > 2){readable_timer_mode = 0}
 }
-
-function msecDisplaySwitcher(){
-    if(msec_display){
-        msec_display = false
-        $("#time-left-msec").css("display", "none");
+addEventListener("fullscreenchange", (event) => {
+    console.log("lol")
+    if(document.fullscreen){
+        $("#style").attr("href", "fullscreen-style.css")
     }else{
-        msec_display = true
-        $("#time-left-msec").css("display", "unset");
+        $("#style").attr("href", "style.css")
     }
-}
-
+})
 function Cycle() {
     var timestamp = Date.now() / 1000,
         left = maxtimestamp - timestamp,
-        tmsec = Math.floor(left * 1000) % 1000,
         t = Math.floor(left);
-    $("#time-left").html(t.toLocaleString('ru'));
-    $("#time-left-msec").html("." + ('00' + tmsec).slice(-3));
+    $("#time").html(t.toLocaleString('ru'));
     $("#prog").val(timestamp);
     $("#timestamp").html(Math.trunc(timestamp).toLocaleString('ru'));
     if (left < 60 && readable_timer_mode != 2) { $("#time-left-readable").css("display", "none") }
     if (left <= 0) {
         clearInterval(c);
-        $("#time-left").html("0");
-        $("#time-left-msec").html(".000");
+        $("#time").html("0");
         $("#title").html("С͓̪̩̳͕͍̄ͮͤ̚̚м̦͎͉̝̋̄е̥͕̫̫̱̱͓̞̾р̞̤̰͖̤̟̫͓̏̍͒ͣ͐͂̚ͅт̗̥̲̩̣̯̹̅ͅь̙͍̟̟̮̩̦̹ͩͤ");
     }
     switch (readable_timer_mode){

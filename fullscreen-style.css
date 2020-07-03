@@ -7,12 +7,27 @@ body{
     width: 100%;
 }
 #time{
-    text-align: center;
     font-size: 10em;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
 }
 #time-left-readable{
     text-align: center;
     cursor: pointer;
+}
+#bar{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 #button-to-fullscreen, #button-fullscreen-exit{
     position: absolute;
@@ -20,11 +35,12 @@ body{
     top: 35px;
     cursor: pointer;
     color: #333;
+    z-index: 1;
 }
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
 }
-#button-fullscreen-exit{
+#button-to-fullscreen, #decsription, footer{
     display: none;
 }
 #title{

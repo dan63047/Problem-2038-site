@@ -1,23 +1,41 @@
+@font-face{
+    font-family: '7Digital';
+    src: url('digital-7\ \(mono\).ttf');
+    font-weight: normal;
+    font-style: monospace;
+}
 body{
     background-color: #000;
     color: #fff;
     font-family: 'Heebo', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 0 8px;
 }
 #prog{
     width: 100%;
 }
-#time{
-    font-size: 10em;
-    width: 100%;
-    height: 100%;
+#title{
     position: fixed;
     top: 0;
-    left: 0;
+    width: calc(100% - 16px);
+}
+#time{
+    font-size: 20em;
+    width: calc(100% - 16px);
+    height: 100%;
+    font-family: '7Digital';
     display: flex;
-    align-items: center;
+    align-items: baseline;
     align-content: center;
     justify-content: center;
     overflow: auto;
+    cursor: pointer;
+}
+#time-left-msec{
+    font-size: 4rem;
 }
 #time-left-readable{
     text-align: center;
@@ -25,9 +43,8 @@ body{
 }
 #bar{
     position: fixed;
-    left: 0;
     bottom: 0;
-    width: 100%;
+    width: calc(100% - 16px);
 }
 #button-to-fullscreen, #button-fullscreen-exit{
     position: absolute;
@@ -40,7 +57,7 @@ body{
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
 }
-#button-to-fullscreen, #decsription, footer{
+#button-to-fullscreen, #description, footer{
     display: none;
 }
 #title{

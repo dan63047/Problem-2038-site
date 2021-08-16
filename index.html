@@ -27,19 +27,20 @@
 	</div>
 	<div id="counter">
 		<h1 id="title">До смерти 32-битных систем осталось</h1>
-		<div id="time"></div>
+		<div id="time"><span id="time-left" onclick="msecDisplaySwitcher()"></span><span id="time-left-msec"></span></div>
 		<div id="bar">
 			<p id="time-left-readable" onclick="ReadableTimerSwitcher()"></p>
 			<progress id="prog" max="2147483647"></progress>
 		</div>
 	</div>
-	<div id="decsription">
+	<div id="description">
 		<h3>О чём этот сайт?</h3>
 		<p>Проблема 2038 года в вычислительной технике — ожидаемые сбои в программном обеспечении накануне 19 января
 			2038 года. Данная проблема затронет программы и системы, в которых используется представление времени по
 			стандарту POSIX (UNIX-время), которое представляет собой количество секунд, прошедшее с полуночи 1 января
 			1970 года. Такое представление времени — это стандарт для Unix-подобных операционных систем (из-за
-			повсеместного использования языка Си).</p>
+			повсеместного использования языка Си). Самая поздняя дата, которая может быть представлена таким форматом
+			в стандарте POSIX — это 03:14:07, вторник, 19 января 2038 года по Всемирному времени (UTC).</p>
 		<p>Сейчас значение Unix timestamp равно <span id="timestamp"></span>.</p>
 		<p>Для проблемы 2038 года не существует простого решения для существующих комбинаций операционных систем и
 			прикладного программного обеспечения. Изменение определения типа time_t на 64 бита нарушит бинарную
@@ -63,7 +64,7 @@
 		<hr>
 		<p>Автор сайта: <a href="https://t.me/dan63047">dan63047</a></p>
 	</footer>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 

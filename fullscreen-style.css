@@ -1,6 +1,6 @@
 @font-face{
     font-family: '7Digital';
-    src: url('digital-7\ \(mono\).ttf');
+    src: url('Orloj.otf');
     font-weight: normal;
     font-style: monospace;
 }
@@ -23,7 +23,7 @@ body{
     width: calc(100% - 16px);
 }
 #time{
-    font-size: 20em;
+    font-size: 12em;
     width: calc(100% - 16px);
     height: 100%;
     font-family: '7Digital';

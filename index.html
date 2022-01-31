@@ -25,42 +25,29 @@
 			<path fill-rule="evenodd" d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z"/>
 		</svg>
 	</div>
+	<div id="language-selector"><span id="lang-name">language:</span><a id="rus" onclick="languageSwitcher('ru')">ru</a><a id="eng" onclick="languageSwitcher('en')">en</a></div>
 	<div id="counter">
-		<h1 id="title">До смерти 32-битных систем осталось</h1>
+		<h1 id="title_ru">До смерти 32-битных систем осталось</h1>
+		<h1 id="title_en">Until the death of 32-bit systems remaining</h1>
 		<div id="time"><span id="time-left" onclick="msecDisplaySwitcher()"></span><span id="time-left-msec"></span></div>
 		<div id="bar">
 			<p id="time-left-readable" onclick="ReadableTimerSwitcher()"></p>
 			<progress id="prog" max="2147483647"></progress>
 		</div>
 	</div>
-	<div id="description">
+	<div id="description_ru">
 		<h3>О чём этот сайт?</h3>
-		<p>Проблема 2038 года в вычислительной технике — ожидаемые сбои в программном обеспечении накануне 19 января
-			2038 года. Данная проблема затронет программы и системы, в которых используется представление времени по
-			стандарту POSIX (UNIX-время), которое представляет собой количество секунд, прошедшее с полуночи 1 января
-			1970 года. Такое представление времени — это стандарт для Unix-подобных операционных систем (из-за
-			повсеместного использования языка Си).</p>
-		<p>Сейчас значение Unix timestamp равно <span id="timestamp"></span>.</p>
+		<p>Проблема 2038 года в вычислительной технике — ожидаемые сбои в программном обеспечении накануне 19 января 2038 года. Данная проблема затронет программы и системы, в которых используется представление времени по
+			стандарту POSIX (UNIX-время), которое представляет собой количество секунд, прошедшее с полуночи 1 января 1970 года. Такое представление времени — это стандарт для Unix-подобных операционных систем (из-за повсеместного использования языка Си).</p>
+		<p>Сейчас значение Unix timestamp равно <span id="timestamp_ru"></span>.</p>
 		<h3>В чём проблема?</h3>
-		<p>В старых 32-битных системах (до середины 1990-х) используется тип данных time_t для хранения секунд в виде
-			signed int (32-битного целого со знаком). Самая поздняя дата, которая может быть представлена таким
-			форматом в стандарте POSIX — это 03:14:07, вторник, 19 января 2038 года по Всемирному времени (UTC).</p>
-		<p>Более позднее время заставит такое поле данных стать отрицательным, как бы закольцевав таким образом время
-			 (поскольку отрицательное число может быть воспринято программами как время в 1970 или 1901 году, в
-			 зависимости от реализации). В результате любые расчёты, включающие дату позже 19 января 2038 года, могут
-			 привести к сбою программы либо к ошибочным вычислениям.</p>
-		<p>Для проблемы 2038 года не существует простого решения для существующих комбинаций операционных систем и
-			прикладного программного обеспечения. Изменение определения типа time_t на 64 бита нарушит бинарную
-			совместимость программ, существующих хранимых данных и всего другого, использующего представление времени в
-			бинарном виде. А приведение time_t в целое без знака может нарушить работу программ, которые вычисляют
-			разницу во времени.</p>
+		<p>В старых 32-битных системах (до середины 1990-х) используется тип данных <code>time_t</code> для хранения секунд в виде <code>signed int</code> (32-битного целого со знаком). Самая поздняя дата, которая может быть представлена таким форматом в стандарте POSIX — это 03:14:07, вторник, 19 января 2038 года по Всемирному времени (UTC).</p>
+		<p>Более позднее время заставит такое поле данных стать отрицательным, как бы закольцевав таким образом время (поскольку отрицательное число может быть воспринято программами как время в 1970 или 1901 году, в зависимости от реализации). В результате любые расчёты, включающие дату позже 19 января 2038 года, могут привести к сбою программы либо к ошибочным вычислениям.</p>
+		<p>Для проблемы 2038 года не существует простого решения для существующих комбинаций операционных систем и прикладного программного обеспечения. Изменение определения типа time_t на 64 бита нарушит бинарную совместимость программ, существующих хранимых данных и всего другого, использующего представление времени в бинарном виде. А приведение time_t в целое без знака может нарушить работу программ, которые вычисляют разницу во времени.</p>
 		<h3>Что подвержено этой проблеме?</h3>
-		<p>Многие структуры данных, которые используются сегодня, имеют 32-битные представления времени, встроенные
-			в их структуру. Полный список этих структур данных практически невозможно составить, но есть хорошо известные
-			структуры данных, у которых есть проблема времени Unix:</p>
+		<p>Многие структуры данных, которые используются сегодня, имеют 32-битные представления времени, встроенные в их структуру. Полный список этих структур данных практически невозможно составить, но есть хорошо известные структуры данных, у которых есть проблема времени Unix:</p>
 		<ul>
-			<li>файловые системы (многие файловые системы используют только 32 бита для представления времени в индексных 
-				дескрипторах)</li>
+			<li>файловые системы (многие файловые системы используют только 32 бита для представления времени в индексных дескрипторах)</li>
 			<li>форматы двоичных файлов (в которых используются 32-битные поля времени)</li>
 			<li>базы данных (которые имеют 32-битные поля времени)</li>
 			<li>языки запросов к базам данных, такие как SQL, которые имеют команды, похожие на <code>UNIX_TIMESTAMP()</code></li>
@@ -70,17 +57,45 @@
 			<li>встроенные подсистемы управления и мониторинга завода, НПЗ</li>
 			<li>различное медицинское, военное оборудование</li>
 		</ul>
-		<p>Любая система, использующая структуры данных, содержащие 32-битные представления времени, представляет риск.
-			Степень риска зависит от характера отказа.</p>
-		<h3>Использаванные материалы при составлении этого текста</h3>
+		<p>Любая система, использующая структуры данных, содержащие 32-битные представления времени, представляет риск. Степень риска зависит от характера отказа.</p>
+		<h3>Использованные материалы при составлении этого текста</h3>
 		<ul>
 			<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_2038_%D0%B3%D0%BE%D0%B4%D0%B0">Проблема 2038 года - Wikipedia RU</a></li>
 			<li><a href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem - Wikipedia EN</a></li>
 		</ul>
 	</div>
+	<div id="description_en">
+		<h3>What is this site?</h3>
+		<p>The Year 2038 problem in computing technology - expected failures in software on the eve of January 19, 2038. This problem will affect the programs and systems that use the presentation view according to the POSIX standard (UNIX-time), which is the number of seconds passed from midnight on January 1, 1970. Such a presentation of time is a standard for UNIX-like operating systems (due to the ubiquitous use of the C language).</p>
+		<p>Now the UNIX timestamp value is <span id="timestamp_en"></span>.</p>
+		<h3>What is the problem?</h3>
+		<p>In the old 32-bit systems (until the mid-1990s), the <code>time_t</code> data type is used to store seconds in the form of <code>signed int</code> (32-bit integer with the sign). The most late date, which can be represented by this format in POSIX Standard - is 03:14:07, Tuesday, January 19, 2038 for World Time (UTC).</p>
+		<p>Later time will cause such a field to become negative, as if looping the time in this way (since a negative number can be interpreted by programs as time in 1970 or 1901, depending on the implementation). As a result, any calculations that include a date later than January 19, 2038 may cause the program to crash or cause erroneous calculations.</p>
+		<p>For the year 2038 problem, there is no universal solution for existing combinations of operating systems and application software. Changing the definition of the <code>time_t</code> type to 64 bits will break the binary compatibility of programs, existing stored data, and anything else that uses a binary representation of time. And casting <code>time_t</code> to an unsigned integer can break programs that compute the time difference.</p>
+		<h3>What is affected by this problem?</h3>
+		<p>Many data structures that are used today have 32-bit time presentations built into their structure. The complete list of these data structures is almost impossible to compile, but there are well-known data structures that have a UNIX time problem:</p>
+		<ul>
+			<li>file Systems (Many file systems use only 32 bits to submit time in index descriptors)</li>
+			<li>binary file formats (in which 32-bit time are used)</li>
+			<li>databases (which have 32-bit time fields)</li>
+			<li>languages requests for databases, such as SQL, which have commands similar to <code>UNIX_TIMESTAMP()</code></li>
+		</ul>
+		<p>Examples of systems using data structures that may contain 32-bit presentations of the time include:</p>
+		<ul>
+			<li>embedded management and monitoring subsystems, refinery</li>
+			<li>various medical, military equipment</li>
+		</ul>
+		<p>Any system that uses data structures containing 32-bit time represents the risk. The degree of risk depends on the nature of the failure.</p>
+		<h3>Used materials when compiling this text</h3>
+		<ul>
+			<li><a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_2038_%D0%B3%D0%BE%D0%B4%D0%B0">Проблема 2038 года - Wikipedia RU</a></li>
+			<li><a href="https://en.wikipedia.org/wiki/Year_2038_problem">Year 2038 problem - Wikipedia EN</a></li>
+		</ul>
+	</div>
+	<div id="other_countdowns"></div>
 	<footer>
 		<hr>
-		<p>Автор сайта: <a href="https://t.me/dan63047">dan63047</a></p>
+		<p><span id="me_tg_ru">Автор сайта: </span><span id="me_tg_en" style="display: none;">Author of the site: </span><a href="https://t.me/dan63047">dan63047</a></p>
 	</footer>
 	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>

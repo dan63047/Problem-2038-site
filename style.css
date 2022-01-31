@@ -26,6 +26,7 @@ body{
     cursor: pointer;
 }
 #button-to-fullscreen, #button-fullscreen-exit{
+    transition: 500ms;
     position: absolute;
     left: 25px;
     top: 35px;
@@ -35,12 +36,40 @@ body{
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
 }
-#button-fullscreen-exit{
+#button-fullscreen-exit, #title_en, #description_en{
     display: none;
 }
-#title{
+#title_ru, #title_en{
     text-align: center;
 }
+a{
+    transition: 500ms;
+    color: #333;
+    text-decoration: none;
+}
+a:hover{
+    color: #fff;
+}
 a:visited{
+    color: #999;
+}
+a:visited:hover{
+    color: #fff;
+}
+#language-selector{
+    position: absolute;
+    right: 25px;
+    top: 35px;
+    
+    color: #333;
+}
+#lang-name, #rus{
+    padding-right: 7px;
+}
+#rus, #eng{
+    transition: 500ms;
+}
+#rus:hover, #eng:hover{
+    cursor: pointer;
     color: #fff;
 }

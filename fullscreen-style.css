@@ -17,8 +17,9 @@ body{
 #prog{
     width: 100%;
 }
-#title{
+#title_ru, #title_en{
     position: fixed;
+    text-align: center;
     top: 0;
     width: calc(100% - 16px);
 }
@@ -47,6 +48,7 @@ body{
     width: calc(100% - 16px);
 }
 #button-to-fullscreen, #button-fullscreen-exit{
+    transition: 500ms;
     position: absolute;
     left: 25px;
     top: 35px;
@@ -57,12 +59,9 @@ body{
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
 }
-#button-to-fullscreen, #description, footer{
+#button-to-fullscreen, #description_ru, #description_en, footer, #language-selector{
     display: none;
 }
 #title{
     text-align: center;
-}
-a:visited{
-    color: #fff;
 }

@@ -2,12 +2,13 @@ const maxtimestamp = 2147483647;
 var readable_timer_mode = 0;
 var msec_display = true;
 var fullscreen = false;
-var other_counters = [  ["Year 2100 bug", "Проблема 2100 года", 946684800, 4102444800], 
+var other_counters = [  
                         ["UNIX unsinged 32-bit timestamp", "UNIX 32 бита без знака", 0, 4294967295],
                         ["FAT filesystems timestamps", "Штампы времени файловой системы FAT", 351907200, 4354819200],
-                        ["Year 10K bug", "Проблема 10 000 года", -62167219200, 253402300800],
-                        ["Year 32,768 bug", "Проблема 32 768 года", -62167219200, 971890963200],
-                        ["Year 65,536 bug", "Проблема 65 536 года", -62167219200, 2005949145600],
+                        ["ext4 filesystems timestamps", "Штампы времени файловой системы ext4", -2147470217, 17176838400],
+                        ["NTFS filesystems timestamps", "Штампы времени файловой системы NTFS", -11644473600, 1833029913600],
+                        // ["Year 32,768 bug", "Проблема 32 768 года", -62167219200, 971890963200],
+                        // ["Year 65,536 bug", "Проблема 65 536 года", -62167219200, 2005949145600],
                         ["UNIX singed 64-bit timestamp", "UNIX 64 бита со знаком", 0, 9223372036854775807],
                         ["UNIX unsinged 64-bit timestamp", "UNIX 64 бита без знака", 0, 18446744073709551615],
                     ];

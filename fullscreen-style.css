@@ -59,7 +59,7 @@ body{
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
 }
-#button-to-fullscreen, #description_ru, #description_en, footer, #language-selector{
+#button-to-fullscreen, #description_ru, #description_en, footer, #language-selector, #other_countdowns{
     display: none;
 }
 #title{

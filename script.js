@@ -5,7 +5,7 @@ var fullscreen = false;
 var other_counters = [ // Title EN, Title RU, Start Unix timestamp, End Unix timestamp, Description EN, Description RU 
                         ["UNIX unsinged 32-bit timestamp", "UNIX 32 бита без знака", 0n, 4294967295n, "Developers of some systems have thought that singed 32-bit may not be enough and decided to use unsinged 32-bit.", "Разработчики некоторых систем додумались, что 32 бита со знаком однажды может не хватить и решили использовать 32 бита без знака."],
                         ["FAT filesystems timestamps", "Штампы времени файловой системы FAT", 315532800n, 4354819198n, "", "На каждую отметку времени отводится четыре байта: два - на дату и два - на время. Год хранится в формате количества лет от начала эпохи Microsoft. Отсюда и диапазон - от 1980 до 2107 года"],
-                        ["ext4 filesystems timestamps", "Штампы времени файловой системы ext4", -2147472000n, 15032385529n, "Inode Timestamps", ""],
+                        ["ext4 filesystems timestamps", "Штампы времени файловой системы ext4", -2147483648n, 15032385529n, "Inode Timestamps", ""],
                         ["NTFS filesystems timestamps", "Штампы времени файловой системы NTFS", -11644473600n, 1833029984880n, "File times are 64-bit numbers counting 100-nanosecond intervals (ten million per second) since 1601, which is 58,000+ years", "Для хранения даты и времени отведено 64 бита; шаг — 100 наносекунд (десять миллионов интервалов в секунду). Это позволяет указать дату и время в промежутке из 58 тысяч лет."],
                         // ["Year 32,768 bug", "Проблема 32 768 года", -62167219200, 971890963200, "", ""],
                         // ["Year 65,536 bug", "Проблема 65 536 года", -62167219200, 2005949145600, "", ""],

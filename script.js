@@ -2,15 +2,15 @@ const maxtimestamp = 2147483647;
 var readable_timer_mode = 0;
 var msec_display = true;
 var fullscreen = false;
-var other_counters = [  
-                        ["UNIX unsinged 32-bit timestamp", "UNIX 32 бита без знака", 0, 4294967295],
-                        ["FAT filesystems timestamps", "Штампы времени файловой системы FAT", 351907200, 4354819200],
-                        ["ext4 filesystems timestamps", "Штампы времени файловой системы ext4", -2147470217, 17176838400],
-                        ["NTFS filesystems timestamps", "Штампы времени файловой системы NTFS", -11644473600, 1833029913600],
-                        // ["Year 32,768 bug", "Проблема 32 768 года", -62167219200, 971890963200],
-                        // ["Year 65,536 bug", "Проблема 65 536 года", -62167219200, 2005949145600],
-                        ["UNIX singed 64-bit timestamp", "UNIX 64 бита со знаком", 0, 9223372036854775807],
-                        ["UNIX unsinged 64-bit timestamp", "UNIX 64 бита без знака", 0, 18446744073709551615],
+var other_counters = [ // Title EN, Title RU, Start Unix timestamp, End Unix timestamp, Description EN, Description RU 
+                        ["UNIX unsinged 32-bit timestamp", "UNIX 32 бита без знака", 0n, 4294967295n, "Developers of some systems have thought that singed 32-bit may not be enough and decided to use unsinged 32-bit.", "Разработчики некоторых систем додумались, что 32 бита со знаком однажды может не хватить и решили использовать 32 бита без знака."],
+                        ["FAT filesystems timestamps", "Штампы времени файловой системы FAT", 315532800n, 4354819200n, "", "На каждую отметку времени отводится четыре байта: два - на дату и два - на время. Год хранится в формате количества лет от начала эпохи Microsoft. Отсюда и диапазон - от 1980 до 2107 года"],
+                        ["ext4 filesystems timestamps", "Штампы времени файловой системы ext4", -2147472000n, 17176838400n, "", ""],
+                        ["NTFS filesystems timestamps", "Штампы времени файловой системы NTFS", -11644473600n, 1833029913600n, "File times are 64-bit numbers counting 100-nanosecond intervals (ten million per second) since 1601, which is 58,000+ years", "Для хранения даты и времени отведено 64 бита; шаг — 100 наносекунд (десять миллионов интервалов в секунду). Это позволяет указать дату и время в промежутке из 58 тысяч лет."],
+                        // ["Year 32,768 bug", "Проблема 32 768 года", -62167219200, 971890963200, "", ""],
+                        // ["Year 65,536 bug", "Проблема 65 536 года", -62167219200, 2005949145600, "", ""],
+                        ["UNIX singed 64-bit timestamp", "UNIX 64 бита со знаком", 0n, 9223372036854775807n, "Proposed as a solution to problem 2038 and turns it into problem 292277026596 because the extreme time that can be represented by this format is December 4, 292,277,026,596, 15:30:08 UTC.", "Предлагается в качестве решения проблемы 2038 и превращает её в проблему 292277026596 года, потому что крайнее время, которое может быть представлено данным форматом - 4 Декабря 292 277 026 596 года, 15:30:08 UTC."],
+                        ["UNIX unsinged 64-bit timestamp", "UNIX 64 бита без знака", 0n, 18446744073709551615n, "Humanity will never get to that point, don't worry", "Человечество никогда не доживёт до этого момента, не волнуйтесь"],
                     ];
 var language_user = window.navigator ? (window.navigator.language ||
     window.navigator.systemLanguage ||
@@ -71,11 +71,11 @@ function Cycle() {
         left = maxtimestamp - timestamp,
         lmsec = Math.floor(left * 1000) % 1000,
         t = Math.floor(left);
-    $("#time-left").html(t.toLocaleString('ru'));
+    $("#time-left").html(t.toLocaleString(language_site));
     $("#time-left-msec").html("." + ("00" + lmsec).slice(-3))
     $("#prog").val(timestamp);
-    $("#timestamp_ru").html(Math.trunc(timestamp).toLocaleString('ru'));
-    $("#timestamp_en").html(Math.trunc(timestamp).toLocaleString('ru'));
+    $("#timestamp_ru").html(Math.trunc(timestamp).toLocaleString(language_site));
+    $("#timestamp_en").html(Math.trunc(timestamp).toLocaleString(language_site));
     if (left < 60 && readable_timer_mode != 2) { $("#time-left-readable").css("display", "none") }
     if (left <= 0) {
         clearInterval(c);
@@ -97,27 +97,21 @@ function Cycle() {
             thour = Math.floor(left / 60 / 60) % 24,
             tday = Math.floor(left / 60 / 60 / 24) % 365,
             tyear = Math.floor(left / 60 / 60 / 24 / 365);
-        switch (language_site) {
-            case "ru":
-                $("#time-left-readable").html("(" + tyear + " л. " + tday + " дн. " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
-                break;
-            case "en":
-                $("#time-left-readable").html("(" + tyear + " y. " + tday + " d. " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
-                break;
-        }
+        $("#time-left-readable").html("(" + tyear.toLocaleString(language_site, {style: "unit", unit: "year"}) + " " + tday.toLocaleString(language_site, {style: "unit", unit: "day"}) + " " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
         break;
         case 2:
-        var precentage = (timestamp/maxtimestamp)*100;
-        $("#time-left-readable").html(Math.trunc(timestamp).toLocaleString('ru')+" / "+maxtimestamp.toLocaleString('ru')+" ("+precentage.toFixed(8)+"%)");
+        $("#time-left-readable").html(Math.trunc(timestamp).toLocaleString(language_site)+" / "+maxtimestamp.toLocaleString(language_site)+" ("+(timestamp/maxtimestamp).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})+")");
         break;
     }
     let other_counters_html = (language_site == "ru") ? "<h3>Другие, более далёкие проблемы времени в вычислительной технике</h3>" : "<h3>Other, more distant time problems in computing</h3>";
     other_counters.forEach(element => {
-        l = element[3] - timestamp;
-        other_counters_html = other_counters_html + '<div id="other_counter"><h4>'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'7Digital\'">' + Math.trunc(l).toLocaleString('ru') +
-        '</span><div class="othr_progress" style="float: right">' + new Date(element[3]*1000).toUTCString() + " · " +(((timestamp-element[2])/(element[3]-element[2]))*100).toFixed(8).toString() +
-        '% · ' + Math.floor(l / 60 / 60 / 24 / 365).toLocaleString('ru') + ((language_site == "ru") ? " л. " : " y. ") + (Math.floor(l / 60 / 60 / 24) % 365).toString() + ((language_site == "ru") ? " дн. " : " d. ") +
-        ("0" + (Math.floor(l / 60 / 60) % 24)).slice(-2) + ':' + ("0" + (Math.floor(l / 60) % 60)).slice(-2) + ':' + ("0" + (Math.floor(l) % 60)).slice(-2) + '</div>' + '</div>';
+        l = element[3] - BigInt(Math.trunc(timestamp));
+        other_counters_html = other_counters_html + '<div id="other_counter"><h4>'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'7Digital\'">'
+        + l.toLocaleString(language_site) + '</span><div class="othr_progress" style="float: right">' // second argument: {notation: "compact", compactDisplay: "long", style: "unit", unit: "second", unitDisplay: 'long'}
+        + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})
+        + " · " + new Date(parseInt(element[2])*1000).toUTCString() + " - " + new Date(parseInt(element[3])*1000).toUTCString()
+        + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2)
+        + '</div><p>' + element[(language_site == "ru") ? 5 : 4] + '</p></div>';
     });
     $("#other_countdowns").html(other_counters_html)
 }

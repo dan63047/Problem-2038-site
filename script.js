@@ -17,8 +17,10 @@ var language_user = window.navigator ? (window.navigator.language ||
     window.navigator.userLanguage) : "ru";
 language_user = language_user.substr(0, 2).toLowerCase();
 language_site = (language_user == "ru" || language_user == "by" || language_user == "ua") ? "ru" : "en";
-var date_to_local = new Intl.DateTimeFormat(language_site, {timeZone: 'UTC', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short'});
-var relative_to_local = new Intl.RelativeTimeFormat(language_site, {numeric: 'auto', style: 'long'});
+const local_date_settings = {timeZone: 'UTC', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short'};
+var date_to_local = new Intl.DateTimeFormat(language_site, local_date_settings);
+const local_relative_settings = {numeric: 'auto', style: 'long'};
+var relative_to_local = new Intl.RelativeTimeFormat(language_site, local_relative_settings);
 function ReadableTimerSwitcher(){
     readable_timer_mode++
     if(readable_timer_mode > 2){readable_timer_mode = 0}
@@ -68,8 +70,8 @@ function languageSwitcher(lang_code){
             language_site = "en";
             break;
     }
-    date_to_local = new Intl.DateTimeFormat(language_site, {timeZone: 'UTC', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short'});
-    relative_to_local = new Intl.RelativeTimeFormat(language_site, {numeric: 'auto', style: 'long'});
+    date_to_local = new Intl.DateTimeFormat(language_site, local_date_settings);
+    relative_to_local = new Intl.RelativeTimeFormat(language_site, local_relative_settings);
 }
 languageSwitcher(language_site);
 function msecDisplaySwitcher(){
@@ -99,7 +101,7 @@ function SpawnOtherCounters(){
         } catch (e) {
             date_to = ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
         }
-        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'7Digital\'" id="main_cd_'+counter_id+'">'
+        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'Eurostile Round Extended\'" id="main_cd_'+counter_id+'">'
         + l.toLocaleString(language_site) + '</span><div class="othr_progress" style="float: right" id="othr_progress_'+counter_id+'">' // second argument: {notation: "compact", compactDisplay: "long", style: "unit", unit: "second", unitDisplay: 'long'}
         + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})
         + " · " + date_from + " ‒ " + date_to
@@ -180,7 +182,7 @@ function OtherCountersCycle(){
         }
         $("#main_cd_"+counter_id).html(l.toLocaleString(language_site));
         $("#othr_progress_"+counter_id).html(
-            ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})
+            ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9})
         + " · " + date_from + " ‒ " + date_to
         + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2)
         );

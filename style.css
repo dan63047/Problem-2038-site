@@ -1,13 +1,27 @@
-@font-face{
-    font-family: '7Digital';
-    src: url('Orloj.otf');
+@font-face {
+    font-family: 'Eurostile Round';
+    src: local('Eurostile Round Medium'), local('EurostileRound-Medium'), url('fonts/EurostileRound-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Eurostile Round Extended';
+    src: local('Eurostile Round Extended Regular'), local('EurostileRoundExtended-Regular'), url('fonts/EurostileRoundExtended-Regular.ttf') format('truetype');
     font-weight: normal;
-    font-style: monospace;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Eurostile Round Extended';
+    src: local('Eurostile Round Extended Black'), local('EurostileRoundExtended-Black'), url('fonts/EurostileRoundExtended-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
 }
 body{
     background-color: #000;
     color: #fff;
-    font-family: 'Heebo', sans-serif;
+    font-family: 'Eurostile Round';
+    font-weight: 500;
+    font-style: normal;
 }
 #prog{
     width: 100%;
@@ -15,8 +29,10 @@ body{
 #time{
     text-align: center;
     font-size: 10em;
-    font-family: '7Digital';
-    cursor: pointer;
+    font-family: 'Eurostile Round Extended';
+    font-weight: 900;
+    font-style: normal;
+    cursor: pointer; 
 }
 #time-left-msec{
     font-size: 2rem;
@@ -41,6 +57,14 @@ body{
 }
 #title_ru, #title_en{
     text-align: center;
+    font-family: 'Eurostile Round Extended';
+    font-weight: 900;
+    font-style: normal;
+}
+h3{
+    font-family: 'Eurostile Round Extended';
+    font-weight: 900;
+    font-style: normal;
 }
 a{
     transition: 500ms;

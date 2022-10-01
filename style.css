@@ -32,7 +32,8 @@ body{
     font-family: 'Eurostile Round Extended';
     font-weight: 900;
     font-style: normal;
-    cursor: pointer; 
+    cursor: pointer;
+    text-shadow: 0px 0px 4px #fff4, 0px 0px 10px #fff5, 0px 0px 20px #fff4, 0px 0px 100px #fff4;
 }
 #time-left-msec{
     font-size: 2rem;

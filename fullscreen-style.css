@@ -53,6 +53,7 @@ body{
     justify-content: center;
     overflow: auto;
     cursor: pointer;
+    text-shadow: 0px 0px 4px #fff4, 0px 0px 10px #fff5, 0px 0px 20px #fff4, 0px 0px 100px #fff4;
 }
 #time-left-msec{
     font-size: 4rem;

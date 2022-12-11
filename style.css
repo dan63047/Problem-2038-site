@@ -1,18 +1,18 @@
 @font-face {
     font-family: 'Eurostile Round';
-    src: local('Eurostile Round Medium'), local('EurostileRound-Medium'), url('fonts/EurostileRound-Medium.ttf') format('truetype');
+    src: local('Eurostile Round Medium'), local('EurostileRound-Medium'), url('https://dan63.by/static/EurostileRound-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 @font-face {
     font-family: 'Eurostile Round Extended';
-    src: local('Eurostile Round Extended Regular'), local('EurostileRoundExtended-Regular'), url('fonts/EurostileRoundExtended-Regular.ttf') format('truetype');
+    src: local('Eurostile Round Extended Regular'), local('EurostileRoundExtended-Regular'), url('https://dan63.by/static/EurostileRoundExtended-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Eurostile Round Extended';
-    src: local('Eurostile Round Extended Black'), local('EurostileRoundExtended-Black'), url('fonts/EurostileRoundExtended-Black.ttf') format('truetype');
+    src: local('Eurostile Round Extended Black'), local('EurostileRoundExtended-Black'), url('https://dan63.by/static/EurostileRoundExtended-Black.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
 }

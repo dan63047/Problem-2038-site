@@ -27,12 +27,12 @@ function ReadableTimerSwitcher(){
 }
 addEventListener("fullscreenchange", (event) => {
     if(!fullscreen){
-        $("#style").attr("href", "fullscreen-style.css");
-        $("#description_en").css("display", "none");
-        $("#description_ru").css("display", "none");
+        document.querySelector("#style").attributes.href.value = "fullscreen-style.css";
+        document.querySelector("#description_en").style = "display: none;";
+        document.querySelector("#description_ru").style = "display: none;";
         fullscreen = true;
     }else{
-        $("#style").attr("href", "style.css");
+        document.querySelector("#style").attributes.href.value = "style.css";
         languageSwitcher(language_site)
         fullscreen = false;
     }
@@ -42,29 +42,29 @@ function languageSwitcher(lang_code){
     counter_id = 0;
     switch (lang_code) {
         case "ru":
-            $("#title_en").css("display", "none");
-            $("#title_ru").css("display", "block");
-            $("#description_en").css("display", "none");
-            $("#description_ru").css("display", "block");
-            $("#me_tg_en").css("display", "none");
-            $("#me_tg_ru").css("display", "");
+            document.querySelector("#title_en").style = "display: none;";
+            document.querySelector("#title_ru").style = "display: block;";
+            document.querySelector("#description_en").style = "display: none;";
+            document.querySelector("#description_ru").style = "display: block;";
+            document.querySelector("#me_tg_en").style = "display: none;";
+            document.querySelector("#me_tg_ru").style = "display: block;";
             language_site = "ru";
             other_counters.forEach(element => {
-                $("#title_"+counter_id).html(element[1]);
-                $("#desc_"+counter_id).html(element[5]);
+                document.querySelector("#title_"+counter_id).innerHTML = element[1];
+                document.querySelector("#desc_"+counter_id).innerHTML = element[5];
                 counter_id++;
             });
             break;
         case "en":
-            $("#title_ru").css("display", "none");
-            $("#title_en").css("display", "block");
-            $("#description_ru").css("display", "none");
-            $("#description_en").css("display", "block");
-            $("#me_tg_ru").css("display", "none");
-            $("#me_tg_en").css("display", "");
+            document.querySelector("#title_ru").style = "display: none;";
+            document.querySelector("#title_en").style = "display: block;";
+            document.querySelector("#description_ru").style = "display: none;";
+            document.querySelector("#description_en").style = "display: block;";
+            document.querySelector("#me_tg_ru").style = "display: none;";
+            document.querySelector("#me_tg_en").style = "display: block;";
             other_counters.forEach(element => {
-                $("#title_"+counter_id).html(element[0]);
-                $("#desc_"+counter_id).html(element[4]);
+                document.querySelector("#title_"+counter_id).innerHTML = element[0];
+                document.querySelector("#desc_"+counter_id).innerHTML = element[4];
                 counter_id++
             });
             language_site = "en";
@@ -73,14 +73,13 @@ function languageSwitcher(lang_code){
     date_to_local = new Intl.DateTimeFormat(language_site, local_date_settings);
     relative_to_local = new Intl.RelativeTimeFormat(language_site, local_relative_settings);
 }
-languageSwitcher(language_site);
 function msecDisplaySwitcher(){
     if(msec_display){
         msec_display = false
-        $("#time-left-msec").css("display", "none");
+        document.querySelector("#time-left-msec").style = "display: none;";
     }else{
         msec_display = true
-        $("#time-left-msec").css("display", "unset");
+        document.querySelector("#time-left-msec").style = "display: unset;";
     }
 }
 function SpawnOtherCounters(){
@@ -108,26 +107,27 @@ function SpawnOtherCounters(){
         + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2)
         + '</div><p id="desc_'+ counter_id +'">' + element[(language_site == "ru") ? 5 : 4] + '</p></div>'; counter_id++;
     });
-    $("#other_countdowns").html(other_counters_html)
+    document.querySelector("#other_countdowns").innerHTML = other_counters_html
 }
 SpawnOtherCounters();
+languageSwitcher(language_site);
 function Cycle() {
     var timestamp = Date.now() / 1000,
         left = maxtimestamp - timestamp,
         lmsec = Math.floor(left * 1000) % 1000,
         t = Math.floor(left);
-    $("#time-left").html(t.toLocaleString(language_site));
-    $("#time-left-msec").html("." + ("00" + lmsec).slice(-3))
-    $("#prog").val(timestamp);
-    $("#timestamp_ru").html(Math.trunc(timestamp).toLocaleString(language_site));
-    $("#timestamp_en").html(Math.trunc(timestamp).toLocaleString(language_site));
-    if (left < 60 && readable_timer_mode != 2) { $("#time-left-readable").css("display", "none") }
+    document.querySelector("#time-left").innerHTML = t.toLocaleString(language_site);
+    document.querySelector("#time-left-msec").innerHTML =  "." + ("00" + lmsec).slice(-3);
+    document.querySelector("#prog").value = timestamp;
+    document.querySelector("#timestamp_ru").innerHTML = Math.trunc(timestamp).toLocaleString(language_site);
+    document.querySelector("#timestamp_en").innerHTML = Math.trunc(timestamp).toLocaleString(language_site);
+    if (left < 60 && readable_timer_mode != 2) { document.querySelector("#time-left-readable").style = "display: none;" }
     if (left <= 0) {
         clearInterval(c);
-        $("#time-left").html("0");
-        $("#time-left-msec").html(".000")
-        $("#title_ru").html("С͓̪̩̳͕͍̄ͮͤ̚̚м̦͎͉̝̋̄е̥͕̫̫̱̱͓̞̾р̞̤̰͖̤̟̫͓̏̍͒ͣ͐͂̚ͅт̗̥̲̩̣̯̹̅ͅь̙͍̟̟̮̩̦̹ͩͤ");
-        $("#title_en").html("D̴̠͆̉̑͑̏e̴̦͑́ǎ̷̯̟̳͙t̸̡͔̖̞̝͔̅͌̒̎̓͑͊ͅh̶͈̩̰͈̾̾̑̂̌̇̈́ͅ");
+        document.querySelector("#time-left").innerHTML = "0";
+        document.querySelector("#time-left-msec").innerHTML = ".000";
+        document.querySelector("#title_ru").innerHTML = "С͓̪̩̳͕͍̄ͮͤ̚̚м̦͎͉̝̋̄е̥͕̫̫̱̱͓̞̾р̞̤̰͖̤̟̫͓̏̍͒ͣ͐͂̚ͅт̗̥̲̩̣̯̹̅ͅь̙͍̟̟̮̩̦̹ͩͤ";
+        document.querySelector("#title_en").innerHTML = "D̴̠͆̉̑͑̏e̴̦͑́ǎ̷̯̟̳͙t̸̡͔̖̞̝͔̅͌̒̎̓͑͊ͅh̶͈̩̰͈̾̾̑̂̌̇̈́ͅ";
         document.title = (language_site == "ru" ? "С͓̪̩̳͕͍̄ͮͤ̚̚м̦͎͉̝̋̄е̥͕̫̫̱̱͓̞̾р̞̤̰͖̤̟̫͓̏̍͒ͣ͐͂̚ͅт̗̥̲̩̣̯̹̅ͅь̙͍̟̟̮̩̦̹ͩͤ" : "D̴̠͆̉̑͑̏e̴̦͑́ǎ̷̯̟̳͙t̸̡͔̖̞̝͔̅͌̒̎̓͑͊ͅh̶͈̩̰͈̾̾̑̂̌̇̈́ͅ");
         return;
     }
@@ -153,13 +153,13 @@ function Cycle() {
     }
     switch (readable_timer_mode){
         case 0:
-        $("#time-left-readable").html("(" + ttday + ":" + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
+            document.querySelector("#time-left-readable").innerHTML = "(" + ttday + ":" + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")";
         break;
         case 1:
-        $("#time-left-readable").html("(" + tyear.toLocaleString(language_site, {style: "unit", unit: "year", unitDisplay: 'long'}) + " " + tday.toLocaleString(language_site, {style: "unit", unit: "day", unitDisplay: 'long'}) + " " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")");
+            document.querySelector("#time-left-readable").innerHTML = "(" + tyear.toLocaleString(language_site, {style: "unit", unit: "year", unitDisplay: 'long'}) + " " + tday.toLocaleString(language_site, {style: "unit", unit: "day", unitDisplay: 'long'}) + " " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")";
         break;
         case 2:
-        $("#time-left-readable").html(Math.trunc(timestamp).toLocaleString(language_site)+" / "+maxtimestamp.toLocaleString(language_site)+" ("+(timestamp/maxtimestamp).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})+")");
+            document.querySelector("#time-left-readable").innerHTML = Math.trunc(timestamp).toLocaleString(language_site)+" / "+maxtimestamp.toLocaleString(language_site)+" ("+(timestamp/maxtimestamp).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})+")";
         break;
     }
 }
@@ -180,12 +180,10 @@ function OtherCountersCycle(){
         } catch (e) {
             date_to = ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
         }
-        $("#main_cd_"+counter_id).html(l.toLocaleString(language_site));
-        $("#othr_progress_"+counter_id).html(
-            ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9})
+        document.querySelector("#main_cd_"+counter_id).innerHTML = l.toLocaleString(language_site);
+        document.querySelector("#othr_progress_"+counter_id).innerHTML = ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9})
         + " · " + date_from + " ‒ " + date_to
-        + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2)
-        );
+        + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2);
         counter_id++;
     });
 }

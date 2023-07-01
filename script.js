@@ -100,7 +100,7 @@ function SpawnOtherCounters(){
         } catch (e) {
             date_to = ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
         }
-        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'Eurostile Round Extended\'" id="main_cd_'+counter_id+'">'
+        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'Eurostile Round Extended\'; overflow-wrap: break-word;" id="main_cd_'+counter_id+'">'
         + l.toLocaleString(language_site) + '</span><div class="othr_progress" style="float: right" id="othr_progress_'+counter_id+'">' // second argument: {notation: "compact", compactDisplay: "long", style: "unit", unit: "second", unitDisplay: 'long'}
         + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})
         + " · " + date_from + " ‒ " + date_to

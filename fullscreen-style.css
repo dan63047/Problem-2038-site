@@ -68,16 +68,17 @@ body{
     width: calc(100% - 16px);
 }
 #button-to-fullscreen, #button-fullscreen-exit{
-    transition: 500ms;
+    transition: 100ms ease-out;
     position: absolute;
     left: 25px;
     top: 35px;
     cursor: pointer;
-    color: #333;
+    color: #666;
     z-index: 1;
 }
 #button-to-fullscreen:hover, #button-fullscreen-exit:hover{
     color: #fff;
+    filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 8px white);
 }
 #button-to-fullscreen, #description_ru, #description_en, footer, #language-selector, #other_countdowns{
     display: none;

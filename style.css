@@ -67,6 +67,10 @@ h3{
     font-family: 'Eurostile Round Extended';
     font-weight: 900;
     font-style: normal;
+    text-align: center;
+}
+h4{
+    text-align: center;
 }
 a{
     transition: 500ms;
@@ -99,4 +103,15 @@ a:visited:hover{
     cursor: pointer;
     color: #fff;
     text-shadow: 0px 0px 4px #fff4, 0px 0px 10px #fff5, 0px 0px 20px #fff4, 0px 0px 100px #fff4;
+}
+th{
+    text-align: left;
+}
+td{
+    text-align: right;
+}
+#other_counter{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }

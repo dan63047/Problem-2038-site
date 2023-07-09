@@ -92,20 +92,18 @@ function SpawnOtherCounters(){
         try {
             date_from = date_to_local.format(date_from)
         } catch (e) {
-            date_from = ((element[2] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
+            date_from = ((language_site == "ru") ? "Год " : "Year ") + ((element[2] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site)
         }
         date_to = new Date(parseInt(element[3])*1000);
         try {
             date_to = date_to_local.format(date_to)
         } catch (e) {
-            date_to = ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
+            date_to = ((language_site == "ru") ? "Год " : "Year ") + ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site)
         }
-        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'Eurostile Round Extended\'; overflow-wrap: break-word;" id="main_cd_'+counter_id+'">'
-        + l.toLocaleString(language_site) + '</span><div class="othr_progress" style="float: right" id="othr_progress_'+counter_id+'">' // second argument: {notation: "compact", compactDisplay: "long", style: "unit", unit: "second", unitDisplay: 'long'}
-        + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})
-        + " · " + date_from + " ‒ " + date_to
-        + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2)
-        + '</div><p id="desc_'+ counter_id +'">' + element[(language_site == "ru") ? 5 : 4] + '</p></div>'; counter_id++;
+        other_counters_html = other_counters_html + '<div id="other_counter"><h4 id="title_'+counter_id+'">'+ element[(language_site == "ru") ? 1 : 0] + '</h4><span style="font-size: 2rem; font-family: \'Eurostile Round Extended\'; overflow-wrap: break-word; text-align: center" id="main_cd_'+counter_id+'">'
+        + l.toLocaleString(language_site) + '</span><table id="other_progress_'+counter_id+'"><tr><th>' + ((language_site == "ru") ? "От" : "From") +'</th><td>' + date_from + '</td></tr><tr><th>' + ((language_site == "ru") ? "До" : "Until") +'</th><td>' + date_to + '</td></tr><tr><th>' + ((language_site == "ru") ? "Прогресс" : "Progress") +'</th><td>' + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8}) + '</td></tr>'
+        + '<tr><th>' + ((language_site == "ru") ? "Осталось" : "Left") +'</th><td>' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2) + '</td></tr>'
+        + '</table><p id="desc_'+ counter_id +'">' + element[(language_site == "ru") ? 5 : 4] + '</p></div>'; counter_id++;
     });
     document.querySelector("#other_countdowns").innerHTML = other_counters_html
 }
@@ -159,7 +157,7 @@ function Cycle() {
             document.querySelector("#time-left-readable").innerHTML = "(" + tyear.toLocaleString(language_site, {style: "unit", unit: "year", unitDisplay: 'long'}) + " " + tday.toLocaleString(language_site, {style: "unit", unit: "day", unitDisplay: 'long'}) + " " + ("0" + thour).slice(-2) + ":" + ("0" + tmin).slice(-2) + ":" + ("0" + tsec).slice(-2) + ")";
         break;
         case 2:
-            document.querySelector("#time-left-readable").innerHTML = Math.trunc(timestamp).toLocaleString(language_site)+" / "+maxtimestamp.toLocaleString(language_site)+" ("+(timestamp/maxtimestamp).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 8})+")";
+            document.querySelector("#time-left-readable").innerHTML = Math.trunc(timestamp).toLocaleString(language_site)+" / "+maxtimestamp.toLocaleString(language_site)+" ("+(timestamp/maxtimestamp).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9})+")";
         break;
     }
 }
@@ -172,18 +170,17 @@ function OtherCountersCycle(){
         try {
             date_from = date_to_local.format(date_from)
         } catch (e) {
-            date_from = ((element[2] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
+            date_to = ((language_site == "ru") ? "Год " : "Year ") + ((element[2] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site)
         }
         date_to = new Date(parseInt(element[3])*1000);
         try {
             date_to = date_to_local.format(date_to)
         } catch (e) {
-            date_to = ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site, {style: "unit", unit: "year"})
+            date_to = ((language_site == "ru") ? "Год " : "Year ") + ((element[3] / 60n / 60n / 24n / 365n) + 1970n).toLocaleString(language_site)
         }
         document.querySelector("#main_cd_"+counter_id).innerHTML = l.toLocaleString(language_site);
-        document.querySelector("#othr_progress_"+counter_id).innerHTML = ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9})
-        + " · " + date_from + " ‒ " + date_to
-        + ' · ' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2);
+        document.querySelector("#other_progress_"+counter_id).innerHTML = '<tr><th>' + ((language_site == "ru") ? "От" : "From") +'</th><td>' + date_from + '</td></tr><tr><th>' + ((language_site == "ru") ? "До" : "Until") +'</th><td>' + date_to + '</td></tr><tr><th>' + ((language_site == "ru") ? "Прогресс" : "Progress") +'</th><td>' + ((timestamp-parseInt(element[2]))/(parseInt(element[3])-parseInt(element[2]))).toLocaleString(language_site, {style: "percent", minimumFractionDigits: 9}) + '</td></tr>'
+        + '<tr><th>' + ((language_site == "ru") ? "Осталось" : "Left") +'</th><td>' + (l / 60n / 60n / 24n / 365n).toLocaleString(language_site, {style: "unit", unit: "year"}) + ' ' + (l / 60n / 60n / 24n % 365n).toLocaleString(language_site, {style: "unit", unit: "day"}) + ' ' + ("0" + (l / 60n / 60n % 24n)).slice(-2) + ':' + ("0" + (l / 60n % 60n)).slice(-2) + ':' + ("0" + (l % 60n)).slice(-2) + '</td></tr>'
         counter_id++;
     });
 }
